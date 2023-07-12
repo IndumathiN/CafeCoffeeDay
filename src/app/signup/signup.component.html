@@ -1,0 +1,58 @@
+<div class="container">
+
+    <form [formGroup]="signupForm" class="form" (ngSubmit)="onSubmit()">
+        <!-- <h1>SIGN UP</h1> -->
+        <mat-toolbar color="accent">
+            <span class="head">Sign Up</span>
+        </mat-toolbar>
+
+        <mat-form-field class="input_width">
+            <mat-label>First Name</mat-label>
+            <input matInput formControlName="f_name">
+        </mat-form-field>
+
+        <mat-form-field class="input_width">
+            <mat-label>Last Name</mat-label>
+            <input matInput formControlName="l_name">
+        </mat-form-field>
+
+        <mat-form-field class="input_width">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+
+            <mat-error *ngIf="f.email.hasError('email') && !f.email.hasError('required')">
+                Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="f.email.hasError('required')">
+                Email is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input_width">
+            <mat-label>Password</mat-label>
+            <input [type]="hide ? 'password' : 'text'" matInput formControlName="password" #password>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-hint align="end">
+                {{password.value.length}} /8
+            </mat-hint>
+            <mat-error *ngIf="f.password.hasError('minLength')">
+                Minimum 8 characters are required.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input_width">
+            <mat-label>Mobile Number</mat-label>
+            <input type="number" matInput formControlName="mobile_no">
+        </mat-form-field>
+
+        <button type=”submit” mat-raised-button color="primary" [disabled]="!signupForm.valid">Submit</button>
+
+        <!-- <button type="submit" mat-raised-button color="primary"> 
+            Submit
+        </button>-->
+
+    </form>
+</div>
