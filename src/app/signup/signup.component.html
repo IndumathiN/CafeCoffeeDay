@@ -48,6 +48,13 @@
             <input type="number" matInput formControlName="mobile_no">
         </mat-form-field>
 
+       
+            <mat-list *ngFor="let cof of coffee | async">
+                <mat-list-item>{{cof.name}}</mat-list-item>
+                
+               </mat-list>
+        
+
         <button type=”submit” mat-raised-button color="primary" [disabled]="!signupForm.valid">Submit</button>
 
         <!-- <button type="submit" mat-raised-button color="primary"> 

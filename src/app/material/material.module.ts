@@ -14,6 +14,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 
@@ -31,6 +34,9 @@ const MaterialComponent=[MatButtonModule,
   MatCheckboxModule,
   MatDatepickerModule,
   MatSelectModule,
+  MatListModule,
+  MatTableModule,
+  MatDialogModule,
   MatButtonToggleModule];
 @NgModule({
   

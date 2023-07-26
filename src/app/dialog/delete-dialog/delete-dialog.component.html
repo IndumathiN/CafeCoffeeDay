@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Do you want to delete {{data.name}}??</h1>
+<div mat-dialog-content>
+  <h2>Confirm?</h2>
+  
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()" color="accent">No</button>
+  <button mat-raised-button mat-dialog-close (click)="deleteDetails(data.id)" cdkFocusInitial color="primary">Yes</button>
+</div>

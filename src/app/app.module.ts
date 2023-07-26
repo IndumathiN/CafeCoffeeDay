@@ -13,10 +13,18 @@ import { AuthGuard } from './auth-guard.service';
 import { MenuComponent } from './menu/menu.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
+
+import { AngularFireModule } from '@angular/fire/compat'
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+// import { AngularFireStorageModule } from '@angular/fire/compat/storage'
+// import { AngularFireAuthModule } from "@angular/fire/compat/auth";
+
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { SignupDetailsComponent } from './signup/signup-details/signup-details.component';
+import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +32,9 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     HomeComponent,
     SignupComponent,
     LoginComponent,
-    MenuComponent
+    MenuComponent,
+    SignupDetailsComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -33,11 +43,15 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAnalytics(() => getAnalytics()),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore())
+    // provideFirebaseApp(() => initializeApp(environment.firebase)),
+    // provideAnalytics(() => getAnalytics()),
+    // provideAuth(() => getAuth()),
+    // provideDatabase(() => getDatabase()),
+    // provideFirestore(() => getFirestore())
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+  //  AngularFireAuthModule,
+  //  AngularFireStorageModule
   ],
   providers: [AuthGuard, ScreenTrackingService,UserTrackingService],
   bootstrap: [AppComponent]
