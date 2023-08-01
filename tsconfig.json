@@ -22,12 +22,15 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "useUnknownInCatchVariables": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
-  }
+    "strictTemplates": true,
+    "skipLibCheck": true
+  },
+ 
 }

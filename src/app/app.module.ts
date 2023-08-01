@@ -25,6 +25,8 @@ import { provideDatabase,getDatabase } from '@angular/fire/database';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { SignupDetailsComponent } from './signup/signup-details/signup-details.component';
 import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.component';
+import { ItemComponent } from './menu/item/item.component';
+import { PriceComponent } from './dialog/price/price.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.comp
     LoginComponent,
     MenuComponent,
     SignupDetailsComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    ItemComponent,
+    PriceComponent
   ],
   imports: [
     BrowserModule,

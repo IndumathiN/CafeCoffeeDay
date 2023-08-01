@@ -1,0 +1,63 @@
+<div class="container">
+
+    <form [formGroup]="itemForm" class="form" (ngSubmit)="onSubmit()">
+        <!-- <h1>SIGN UP</h1> -->
+        <mat-toolbar color="accent">
+            <span class="head">Add Menu</span>
+        </mat-toolbar>
+
+        <mat-form-field class="input_width">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field class="input_width">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              <mat-option value="coffee">Coffee</mat-option>
+              <mat-option value="tea">Tea</mat-option>
+              <mat-option value="frozen drinks">Frozen Drinks</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field class="input_width">
+            <mat-label>Calories</mat-label>
+            <input matInput formControlName="calories">
+        </mat-form-field>
+
+        
+        
+
+       <mat-form-field class="input_width">
+            <mat-label>Description</mat-label>
+            <textarea matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+          <mat-form-field class="input_width">
+            <mat-label>Image Address</mat-label>
+            <input matInput formControlName="image">
+        </mat-form-field>
+
+        <mat-slide-toggle class="slide" formControlName="dairy">Dairy</mat-slide-toggle>
+        <mat-slide-toggle class="slide" formControlName="flavor">Flavor</mat-slide-toggle>
+        <mat-slide-toggle class="slide" formControlName="sweetner">Sweetner</mat-slide-toggle>
+
+        <div class="input_width">
+            <button mat-fab color="accent" (click)="openDialog()" extended>
+                <mat-icon>add_circle</mat-icon>
+                Add Price
+              </button>
+        </div>
+
+       
+        
+        
+
+        <button type=”submit” mat-raised-button color="primary" [disabled]="!itemForm.valid">Submit</button>
+
+        <!-- <button type="submit" mat-raised-button color="primary"> 
+            Submit
+        </button>-->
+
+    </form>
+</div>

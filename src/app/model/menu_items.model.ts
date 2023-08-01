@@ -5,3 +5,9 @@ export interface Items {
     description:string,
     imgurl:string
  } 
+
+export interface MenuItems{
+    name:string;
+    description:string;
+    imgUrl:string;
+  }

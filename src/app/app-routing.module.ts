@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth-guard.service';
 import {HomeComponent} from "./home/home.component";
 import { LoginComponent } from './login/login.component';
+import { ItemComponent } from './menu/item/item.component';
+import { MenuComponent } from './menu/menu.component';
 import { SignupDetailsComponent } from './signup/signup-details/signup-details.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -27,7 +29,14 @@ const routes: Routes = [
         path: "login",
         component: LoginComponent
     },
-   
+    {
+        path: "menu",
+        component: MenuComponent
+    },
+    {
+        path: "item",
+        component: ItemComponent
+    },
     {
         path: "**",
         redirectTo: '/'

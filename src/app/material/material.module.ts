@@ -17,6 +17,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatListModule} from '@angular/material/list';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 
@@ -37,6 +40,9 @@ const MaterialComponent=[MatButtonModule,
   MatListModule,
   MatTableModule,
   MatDialogModule,
+  MatGridListModule,
+  MatCardModule,
+  MatSlideToggleModule,
   MatButtonToggleModule];
 @NgModule({
   

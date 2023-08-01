@@ -59,14 +59,14 @@ getDetails(id:string){
 );
 }
 
-deleteDetails(id:string){
+// deleteDetails(id:string){
 
-this.firebase.collection("signupDetails").doc(id).delete().then(() => {
-    console.log("Document successfully deleted!");
-}).catch((error) => {
-    console.error("Error removing document: ", error);
-});
-}
+// this.firebase.collection("signupDetails").doc(id).delete().then(() => {
+//     console.log("Document successfully deleted!");
+// }).catch((error) => {
+//     console.error("Error removing document: ", error);
+// });
+// }
 //det=this.firebase.collection("signupDetails").valueChanges().subscribe((details:SignupDet[])=>{fetchDetails.next(details)});
 
 

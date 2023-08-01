@@ -1,0 +1,36 @@
+<div class="container">
+<mat-grid-list [cols]="cols" [rowHeight]="rowHeight"
+    [ngClass]="{'handset-potrait':handsetPotrait}">
+    <mat-grid-tile *ngFor="let course of menu" class="tile">
+        <mat-card class="course-card mat-elevation-z7">
+            <mat-card-header>
+               
+            </mat-card-header>
+            
+            
+        
+            <mat-card-content class="card__header">
+                <!-- <div class="image">
+                    <img class="imgSize" mat-card-image [src]="course.imgUrl">
+                </div> -->
+                <div class="flex-row">
+                    <!-- <div class="temp">
+                      <span>17 C</span>
+                      <span>Feels like </span>
+                      <span>12 C</span>
+                    </div> -->
+                    <div class="outlook">
+                        <img class="imgSize" mat-card-image [src]="course.imgUrl">
+                      
+                    </div>
+              </div>
+            </mat-card-content>
+        
+            <mat-card-actions class="course-actions">
+                <button mat-raised-button color="accent" routerLink="">{{course.name}}</button>
+                <!-- <button mat-raised-button color="accent" (click)="">Edit Course</button> -->
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+</div>
