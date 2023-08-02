@@ -4,6 +4,7 @@ import { AuthGuard } from './auth-guard.service';
 import {HomeComponent} from "./home/home.component";
 import { LoginComponent } from './login/login.component';
 import { ItemComponent } from './menu/item/item.component';
+import { ListComponent } from './menu/list/list.component';
 import { MenuComponent } from './menu/menu.component';
 import { SignupDetailsComponent } from './signup/signup-details/signup-details.component';
 import { SignupComponent } from './signup/signup.component';
@@ -36,6 +37,10 @@ const routes: Routes = [
     {
         path: "item",
         component: ItemComponent
+    },
+    {
+        path: "menulist",
+        component: ListComponent
     },
     {
         path: "**",

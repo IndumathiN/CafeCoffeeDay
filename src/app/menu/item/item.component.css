@@ -23,3 +23,9 @@
         margin: 30px;
      
   }
+  .submit_width{
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }

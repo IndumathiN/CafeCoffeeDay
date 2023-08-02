@@ -28,6 +28,11 @@ import { DeleteDialogComponent } from './dialog/delete-dialog/delete-dialog.comp
 import { ItemComponent } from './menu/item/item.component';
 import { PriceComponent } from './dialog/price/price.component';
 
+
+import { ErrorStateMatcher } from '@angular/material/core';
+import { TouchedErrorStateMatcher } from './touched-error-state.matcher';
+import { ListComponent } from './menu/list/list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +43,8 @@ import { PriceComponent } from './dialog/price/price.component';
     SignupDetailsComponent,
     DeleteDialogComponent,
     ItemComponent,
-    PriceComponent
+    PriceComponent,
+    ListComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +53,7 @@ import { PriceComponent } from './dialog/price/price.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    
     // provideFirebaseApp(() => initializeApp(environment.firebase)),
     // provideAnalytics(() => getAnalytics()),
     // provideAuth(() => getAuth()),
@@ -57,7 +64,8 @@ import { PriceComponent } from './dialog/price/price.component';
   //  AngularFireAuthModule,
   //  AngularFireStorageModule
   ],
-  providers: [AuthGuard, ScreenTrackingService,UserTrackingService],
+  providers: [AuthGuard, ScreenTrackingService,UserTrackingService,
+    { provide: ErrorStateMatcher, useClass: TouchedErrorStateMatcher }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

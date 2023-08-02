@@ -60,7 +60,7 @@ openDialog(): void {
   dialogRef.afterClosed().subscribe(result => {
     
     this.pricelist=result;
-    
+    console.log(this.pricelist);
   });
 }
 
