@@ -42,7 +42,7 @@ export class SignupDetailsComponent {
 
 openDialog(id:string,name:string): void {
   const dialogRef = this.dialog.open(DeleteDialogComponent, {
-    data: {id: id, name: name},
+    data: {id: id, name: name,doc:'signupDetails'},
   });
 
   dialogRef.afterClosed().subscribe(result => {

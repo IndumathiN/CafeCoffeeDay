@@ -54,8 +54,9 @@ export class ListComponent implements AfterViewInit {
   }
 
   openDialog(id:string,name:string): void {
+    const tab=this.docName;
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
-      data: {id: id, name: name},
+      data: {id: id, name: name, doc:tab},
     });
   
     dialogRef.afterClosed().subscribe(result => {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItems } from '../model/menu_items.model';
-
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
 @Component({
   selector: 'app-menu',
@@ -10,44 +10,26 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 
 export class MenuComponent implements OnInit{
 
-  constructor(private responsive :BreakpointObserver){}
+  constructor(private responsive :BreakpointObserver,private firebase:AngularFirestore){}
   rowHeight='500px';
   cols=5;
   handsetPotrait=false;
- menu: MenuItems[]=[{
-  name:'Iced Coffee',
-  description:'It is good',
-  imgUrl:'https://cdn.pickuplimes.com/cache/0e/3a/0e3a9431b6af2aff54e97e573f58476c.jpg'
- },
-{ name:'Cold Brew',
- description:'It is good',
- imgUrl:'https://basicswithbails.com/wp-content/uploads/2023/06/iced-latte-540x720.jpg'
-},
-{ name:'Cold Brew',
- description:'It is good',
- imgUrl:'https://basicswithbails.com/wp-content/uploads/2023/06/iced-latte-540x720.jpg'
-},
-{ name:'Cold Brew',
- description:'It is good',
- imgUrl:'https://basicswithbails.com/wp-content/uploads/2023/06/iced-latte-540x720.jpg'
-},
-{ name:'Cold Brew',
- description:'It is good',
- imgUrl:'https://basicswithbails.com/wp-content/uploads/2023/06/iced-latte-540x720.jpg'
-},
-{ name:'Cold Brew',
- description:'It is good',
- imgUrl:'https://basicswithbails.com/wp-content/uploads/2023/06/iced-latte-540x720.jpg'
-},
-{ name:'Cold Brew',
- description:'It is good',
- imgUrl:'https://basicswithbails.com/wp-content/uploads/2023/06/iced-latte-540x720.jpg'
-},
-{ name:'Cold Brew',
- description:'It is good',
- imgUrl:'https://basicswithbails.com/wp-content/uploads/2023/06/iced-latte-540x720.jpg'
-}
-];
+
+  menu: { id: string; name: string; imgUrl: any; }[]=[];
+
+
+docRef = this.firebase.collection('coffee').get().toPromise().then(querySnapshot => {
+    let details: { id: string; name: string; imgUrl: any; }[]=[];
+    
+    querySnapshot?.forEach((doc) => {
+        // doc.data() is never undefined for query doc snapshots
+        details.push({id:doc.id,name:doc.get('name'),imgUrl:doc.get('image')});
+      
+       
+    });
+    
+    this.menu=details;
+  });
 
 ngOnInit() {
   console.log("width : "+window.innerWidth);

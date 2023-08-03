@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth-guard.service';
 import {HomeComponent} from "./home/home.component";
 import { LoginComponent } from './login/login.component';
+import { DetailsComponent } from './menu/details/details.component';
 import { ItemComponent } from './menu/item/item.component';
 import { ListComponent } from './menu/list/list.component';
 import { MenuComponent } from './menu/menu.component';
@@ -41,6 +42,10 @@ const routes: Routes = [
     {
         path: "menulist",
         component: ListComponent
+    },
+    {
+        path: "menudetail",
+        component: DetailsComponent
     },
     {
         path: "**",

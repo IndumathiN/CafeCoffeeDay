@@ -32,6 +32,7 @@ import { PriceComponent } from './dialog/price/price.component';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { TouchedErrorStateMatcher } from './touched-error-state.matcher';
 import { ListComponent } from './menu/list/list.component';
+import { DetailsComponent } from './menu/details/details.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ListComponent } from './menu/list/list.component';
     DeleteDialogComponent,
     ItemComponent,
     PriceComponent,
-    ListComponent
+    ListComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
