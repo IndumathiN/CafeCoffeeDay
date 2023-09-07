@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItems } from '../model/menu_items.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -10,7 +11,7 @@ import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/l
 
 export class MenuComponent implements OnInit{
 
-  constructor(private responsive :BreakpointObserver,private firebase:AngularFirestore){}
+  constructor(private responsive :BreakpointObserver,private firebase:AngularFirestore,private router:Router){}
   rowHeight='500px';
   cols=5;
   handsetPotrait=false;
@@ -28,11 +29,17 @@ docRef = this.firebase.collection('coffee').get().toPromise().then(querySnapshot
        
     });
     
-    this.menu=details;
+    this.menu=details; //console.log(this.menu);
   });
-
+  
+ 
+  goToLink(menuId:any){
+    this.router.navigate(['/menudetail', menuId]);
+  }
+  
 ngOnInit() {
   console.log("width : "+window.innerWidth);
+  
   this.responsive.observe([
     Breakpoints.TabletLandscape,
     Breakpoints.TabletPortrait,

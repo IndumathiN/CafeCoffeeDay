@@ -1,19 +1,68 @@
-<div>
-    <div class="header">
-    <div class="heading">
-        <img class="imgSize" src="https://images.ctfassets.net/v601h1fyjgba/4GLzOncHIe8rq3xY099cZ/dd17ce72ebb6fb01659c763fe64953db/Iced_Latte.jpg">
-    </div>
-    <div class="title">
-        Iced Latte
-    </div>
-</div>
-    <div class="side-by-side"> 
-        <div> 
-          
-        </div> 
-        <div> 
-          Column 2 
-        </div> 
-      </div> 
-</div>
+<header>
+  <div class="code">
+    <div class="title">{{data.name}}</div>
+    <img class="imgSize"
+      src="https://images.ctfassets.net/v601h1fyjgba/4GLzOncHIe8rq3xY099cZ/dd17ce72ebb6fb01659c763fe64953db/Iced_Latte.jpg">
 
+    <div class="describe">{{data.description}}</div>
+  </div>
+
+</header>
+
+<div class="form">
+  <form>
+    <section>
+      <div class="">
+        <mat-label>Size Options</mat-label>
+        <mat-divider></mat-divider>
+        <mat-form-field class="input_width">
+          <mat-select formControlName="size">
+            <mat-option value="small">Small</mat-option>
+            <mat-option value="Medium">Medium</mat-option>
+            <mat-option value="Large">Large</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+      </div>
+    </section>
+
+    <section>
+      <div class="">
+        <mat-label>Customize</mat-label>
+        <mat-divider></mat-divider>
+        <mat-form-field class="input_width" *ngIf="data.flavor">
+          <mat-label>Flavors</mat-label>
+
+          <mat-select formControlName="flavor">
+            <mat-option *ngFor="let flav of flavors" [value]="flav.id">{{ flav.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="input_width" *ngIf="data.dairy">
+          <mat-label>Dairy</mat-label>
+          <mat-select formControlName="dairy">
+            <mat-option *ngFor="let da of dairy" [value]="da.id">{{ da.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="input_width" *ngIf="data.sweetner">
+          <mat-label>Sweetner</mat-label>
+
+          <mat-select formControlName="sweetner">
+            <mat-option *ngFor="let sweet of sweetner" [value]="sweet.id">{{ sweet.name }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </section>
+
+    <section>
+      <div class="">
+
+
+
+      </div>
+    </section>
+    <footer>
+      <button type=”submit” mat-raised-button color="primary">Add to Order</button>
+    </footer>
+  </form>
+</div>

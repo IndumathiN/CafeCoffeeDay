@@ -6,3 +6,6 @@ export interface SignupDet {
     email:string,
     password:string
  } 
+
+
+ 

@@ -19,8 +19,8 @@
             </mat-card-content>
         
             <mat-card-actions class="course-actions">
-                <button mat-raised-button color="accent" routerLink="">{{course.name}}</button>
-                <!-- <button mat-raised-button color="accent" (click)="">Edit Course</button> -->
+                <!-- <button mat-raised-button color="accent" routerLink="['/menudetail',course.id]">{{course.name}}</button> -->
+                <button mat-raised-button color="accent" (click)="goToLink(course.id)">{{course.name}}</button>
             </mat-card-actions>
         </mat-card>
     </mat-grid-tile>

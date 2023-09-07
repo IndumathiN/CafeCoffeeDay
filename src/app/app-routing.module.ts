@@ -44,7 +44,7 @@ const routes: Routes = [
         component: ListComponent
     },
     {
-        path: "menudetail",
+        path: "menudetail/:id",
         component: DetailsComponent
     },
     {
