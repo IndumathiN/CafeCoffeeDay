@@ -52,4 +52,14 @@ export class DbServiceTsService {
        return data as MenuDetail;
        }));
      }
+
+     addDataCustomDoc(colName: any,docName:any, dataArr: unknown) {
+      this.firebase.collection(colName).doc(docName).set(dataArr)
+        .then(() => {
+          console.log("Added Successfully");
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
+    }
 }

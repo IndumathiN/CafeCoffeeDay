@@ -33,6 +33,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { TouchedErrorStateMatcher } from './touched-error-state.matcher';
 import { ListComponent } from './menu/list/list.component';
 import { DetailsComponent } from './menu/details/details.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { DetailsComponent } from './menu/details/details.component';
     ItemComponent,
     PriceComponent,
     ListComponent,
-    DetailsComponent
+    DetailsComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

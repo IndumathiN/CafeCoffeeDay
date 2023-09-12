@@ -10,7 +10,7 @@
 </header>
 
 <div class="form">
-  <form>
+  <form [formGroup]="detailForm" (ngSubmit)="onSubmit()">
     <section>
       <div class="">
         <mat-label>Size Options</mat-label>

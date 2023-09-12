@@ -1,10 +1,12 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { elementAt, map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { AuthGuard } from 'src/app/auth-guard.service';
 import { MenuDetail } from 'src/app/model/menuDetail.model';
+import { OrderDetail } from 'src/app/model/orderDetail.model';
 import { DbServiceTsService } from 'src/app/service/db-service.ts.service';
 
 @Component({
@@ -20,10 +22,13 @@ export class DetailsComponent implements OnInit,OnDestroy {
   data:any;
   private closed$ = new Subject<any>();
 
+  submitted=false;
   id:any='';
   collection='coffee';
+ 
+
   constructor(private formBuilder: FormBuilder, private firebase: AngularFirestore,
-    private dbService: DbServiceTsService,private route: ActivatedRoute) {  }
+    private dbService: DbServiceTsService,private route: ActivatedRoute,private authService:AuthGuard) {  }
 
   @Input('formGroup') detailForm = this.formBuilder.group({
     flavor: ['', [Validators.required]],
@@ -41,65 +46,50 @@ export class DetailsComponent implements OnInit,OnDestroy {
     console.log(this.id);
    
     this.data=this.dbService.getDetailsByDocId(this.collection,this.id)
-    // .pipe(tap(data => {
-    //   // here you can do what you plan to to do inside getWrapperGridData
-    //  this.getValue(data); 
-    //  }))
    .subscribe(res=>{ 
      this.data=res;
-    this.getValue(); 
+   
     });
     
-  // this.dbService.getDetailsByDocId(this.collection,this.id).toPromise().then((res)=>{this.data=res; console.log(this.data); });
-    // this.dbService.getDetailsByDocId(this.collection,this.id).pipe(
-    //   takeUntil(this.closed$)
-    // ).subscribe({
-    //   next: (data: any) => { console.log(data);
-    //     this.data = data;
-    //     // other statements that depend on `this.userProfile`
-    //   }
-    // });
-
-
-    console.log("ngOnInit ",this.data);
+ 
   }
 
   ngOnDestroy() {
     //this.closed$.next();   // <-- close open subscription(s)
   }
+  get f() { return this.detailForm.controls; }
+
   onSubmit() {
-
-  }
-
-  getValue(){
-    // this.data=data;
-   console.log("getValue ",this.data);
+    
    
-  }
+   
+    // stop here if form is invalid
+    if (this.detailForm.invalid) {
+        return;
+    } else{
+      this.submitted = true;
+     
+      let orderData={} as OrderDetail;
+      orderData={
+        menuId: this.id,
+        name: this.data.name,
+        size: this.detailForm.value['size'],
+         sweetner: this.detailForm.value['sweetner'],
+         flavors: this.detailForm.value['flavor'],
+         dairy: this.detailForm.value['dairy']
+        };
+      let orderArr=[];
+      orderArr.push(orderData);
+     // console.log(orderArr);
+      this.authService.orderCart.emit(orderArr.length as unknown as Event);
+      this.authService.orderCartArr.emit(orderArr);
+    }
+
+    
+}
+
+ 
   
-  getData() {
-     this.firebase.collection('coffee').doc('5KG3eeYHGcm2rVrtXrcA').snapshotChanges().pipe(tap(res => {
-     let detail= { id: res.payload.id, ...res.payload.data() };
-    // console.log(detail);
-     return detail;
-    
-   }));
-  }
-  getDatabyId() {
-    let detail:any;
-     this.firebase.collection('coffee').doc('5KG3eeYHGcm2rVrtXrcA').snapshotChanges().subscribe(
-      res => {
-         detail= { id: res.payload.id, ...res.payload.data() };
-       // console.log(detail);
-        return detail;
-       
-      },
-      err => {
-        console.debug(err);
-      }
-    )
-    ///return detail;
-    
-  }
+  
 
 }

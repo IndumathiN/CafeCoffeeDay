@@ -25,6 +25,12 @@
   <span class="header">COFFEE DAY</span>
   <div>
     <span class="spacer"></span>
+
+    <a mat-button routerLink="cart">
+      <mat-icon  [matBadge]="badgeNo" matBadgePosition="after" matBadgeColor="accent" matBadgeOverlap="false" >shopping_cart</mat-icon>
+      
+  </a>
+
     <a mat-button routerLink="signup" >
       <mat-icon routerLinkActive="active">person_add</mat-icon>
       Register
