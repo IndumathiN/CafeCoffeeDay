@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthGuard } from '../auth-guard.service';
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private formBuilder: FormBuilder,private route:ActivatedRoute,private router: Router) { }
+  constructor(private formBuilder: FormBuilder,private route:ActivatedRoute,private router: Router,private authService:AuthGuard) { }
   
   hide = true;
   submitted=false;
@@ -30,7 +31,7 @@ get f() { return this.signupForm.controls; }
     if (this.signupForm.invalid) {
         return;
     }
-
+   //  this.authService.userDetails.next();
     this.router.navigate(['/signup']);
 }
 }
