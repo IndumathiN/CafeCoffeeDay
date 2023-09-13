@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getDatabase, onValue, ref, set } from '@angular/fire/database';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { Items } from '../model/menu_items.model';
@@ -64,45 +64,70 @@ onValue(starCountRef, (snapshot) => {
   
   
   hide = true;
+  show=true;
   submitted=false;
+  emailExists:any='';
+  check=false;
 
   signupForm = this.formBuilder.group({
     f_name: ['', Validators.required],
     l_name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),this.emailCheck]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
+    email: ['', [Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+    password: ['', [Validators.required, Validators.minLength(8),this.createPasswordStrengthValidator()]],
+    confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
     mobile_no: ['', [Validators.required]]
 });
 
-emailCheck(email:FormControl){
-  let e_mail:any=email.value;
-  // this.firebase.collection("signupDetails").doc(e_mail).ref.get().then(function (doc) {
-  //   if (doc.exists) {
-  //     console.log(doc.data());
-      
-  //   } else {
-  //     console.log("There is no document!");
-  //   }
-  // }).catch(function (error) {
-  //   console.log("There was an error getting your document:", error);
-  // });
 
-  if (!e_mail || (!!e_mail && e_mail.length <= 0)) {
-    return false;
+createPasswordStrengthValidator(): ValidatorFn {
+  return (control:AbstractControl) : ValidationErrors | null => {
+
+      const value = control.value;
+     
+      if (!value) {
+          return null;
+      }
+
+      const hasUpperCase = /[A-Z]+/.test(value);
+
+      const hasLowerCase = /[a-z]+/.test(value);
+
+      const hasNumeric = /[0-9]+/.test(value);
+
+      const passwordValid = hasUpperCase && hasLowerCase && hasNumeric;
+      
+      return !passwordValid ? {passwordStrength:true}: null;
   }
-console.log(e_mail)
-  this.firebase?.collection('signupDetails').doc(e_mail).snapshotChanges().subscribe((res:any) => {
-    if (res.length > 0)
-    {
-    console.log("match found.");
+}
+
+confirmPasswordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+  const password = control.get('password');
+  const confirmPassword = control.get('confirmPassword');
+
+  return password && confirmPassword && password.value === confirmPassword.value ? { confirmPassword: true } : null;
+};
+
+emailCheck(email:any){
+ 
+  this.firebase.collection("signupDetails").doc(email).ref.get().then( (doc) => {
+    if (doc.exists) {
+      console.log(doc.data());
+      this.emailExists='Already exists';
+      this.check=false;
+    } else {
+      console.log("There is no document!");
+      this.emailExists='Valid';
+      this.check=true;
     }
-    else
-    {
-    console.log("does not exist.");
-    }
+  }).catch(function (error) {
+    console.log("There was an error getting your document:", error);
   });
-  console.log(e_mail);
-return true;
+
+  
+console.log(this.emailExists, "  status " ,this.check);
+ 
+  console.log(email);
+
 }
   get f() { return this.signupForm.controls; }
 
@@ -111,7 +136,7 @@ return true;
     this.submitted = true;
     
     // stop here if form is invalid
-    if (this.signupForm.invalid) {
+    if (this.signupForm.invalid || this.check==false) {
         return;
     }
 
@@ -134,6 +159,9 @@ return true;
 let docName:any=this.signupForm.value['email'];
 
 this.dbService.addDataCustomDoc(this.collection_name,docName,signupData);
+
+this.signupForm.reset();
+alert('Success');
   // this.firebase.collection("signupDetails").doc(docName).set(signupData)
   // .then((docRef) => {
   //     console.log("Document written with ID: ", docRef);

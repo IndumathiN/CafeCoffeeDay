@@ -19,12 +19,20 @@
         <mat-form-field class="input_width">
             <mat-label>Email</mat-label>
             <input type="email" matInput formControlName="email" placeholder="Ex. pat@example.com">
+            
+            <button mat-button matSuffix mat-stroked-button color="primary"
+            [disabled]="f.email.hasError('email') && !f.email.hasError('required')"
+            (click)="emailCheck(f.email.value)"
+            >Check {{check}}</button>
 
             <mat-error *ngIf="f.email.hasError('email') && !f.email.hasError('required')">
                 Please enter a valid email address
             </mat-error>
             <mat-error *ngIf="f.email.hasError('required')">
                 Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="check">
+               exists {{emailExists}}
             </mat-error>
         </mat-form-field>
 
@@ -41,6 +49,20 @@
             <mat-error *ngIf="f.password.hasError('minLength')">
                 Minimum 8 characters are required.
             </mat-error>
+            <mat-error *ngIf="f.password.errors?.['passwordStrength']">
+                Your password must have lower case, upper case and numeric characters.
+            </mat-error>
+            
+        </mat-form-field>
+
+        <mat-form-field class="input_width">
+            <mat-label>Confirm Password</mat-label>
+            <input [type]="show ? 'password' : 'text'" matInput formControlName="confirmPassword" name="confirmPassword" type="password" required pattern="{{f.password.value}}">
+            <button mat-icon-button matSuffix (click)="show = !show" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="show">
+                <mat-icon>{{show ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="f.confirmPassword">Passwords do not match.</mat-error>
         </mat-form-field>
 
         <mat-form-field class="input_width">
