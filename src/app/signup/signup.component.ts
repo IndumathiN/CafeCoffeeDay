@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { getDatabase, onValue, ref, set } from '@angular/fire/database';
 import { AbstractControl, FormBuilder, FormControl, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Items } from '../model/menu_items.model';
 import { getFirestore, QueryDocumentSnapshot, SnapshotOptions, WithFieldValue } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { DbServiceTsService } from '../service/db-service.ts.service';
+import { AuthGuard } from '../auth-guard.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,32 +16,29 @@ import { DbServiceTsService } from '../service/db-service.ts.service';
 })
 export class SignupComponent implements OnInit{
 
-  isConstructorCalled = false;
-  constructor(private formBuilder: FormBuilder,private firebase:AngularFirestore,private route: ActivatedRoute,private dbService:DbServiceTsService) { 
-    console.log("constructor")
-    console.log(this.firebase)
+ 
+  constructor(private formBuilder: FormBuilder,private firebase:AngularFirestore,
+    private route: ActivatedRoute,
+    private dbService:DbServiceTsService,
+    public authService:AuthGuard) { 
+    
 
 
-    this.isConstructorCalled = true
+   
   }
 
  
- coffee: Observable<Items[]> | undefined;
+ 
 
  collection_name='signupDetails';
  
   
 
   ngOnInit() {
-  console.log("ngOninit")
-// this.firebase.collection('coffee').get().forEach((qSnapshot) => {console.log(qSnapshot.docs.forEach(d => console.log(d.id, d.data()))) })
-// this.firebase.collection('coffee').snapshotChanges().forEach(a => {
-//   console.log(a.forEach(a1 => {
-//     console.log(a1.type)
-//     console.log(a1.payload.doc.data())
-//  }))
-// })
+  
 console.log(this.route.snapshot.data['id']);
+
+this.authService.mail_exists_Obs.subscribe(data => this.check = data);
 }
 
 writeData(user: string | null | undefined,email: string | null | undefined){
@@ -68,6 +66,8 @@ onValue(starCountRef, (snapshot) => {
   submitted=false;
   emailExists:any='';
   check=false;
+
+  
 
   signupForm = this.formBuilder.group({
     f_name: ['', Validators.required],
@@ -112,21 +112,23 @@ emailCheck(email:any){
   this.firebase.collection("signupDetails").doc(email).ref.get().then( (doc) => {
     if (doc.exists) {
       console.log(doc.data());
+      this.authService.check_mail(false);
       this.emailExists='Already exists';
-      this.check=false;
+      
+     
     } else {
       console.log("There is no document!");
-      this.emailExists='Valid';
-      this.check=true;
+      this.authService.check_mail(true);
+     this.emailExists='Valid';
+  
+    
     }
   }).catch(function (error) {
     console.log("There was an error getting your document:", error);
   });
 
   
-console.log(this.emailExists, "  status " ,this.check);
- 
-  console.log(email);
+
 
 }
   get f() { return this.signupForm.controls; }
@@ -149,30 +151,14 @@ console.log(this.emailExists, "  status " ,this.check);
       mobile:this.signupForm.value['mobile_no'],
     };
 
-  //   this.firebase.collection("signupDetails").add(signupData)
-  // .then((docRef) => {
-  //     console.log("Document written with ID: ", docRef.id);
-  // })
-  // .catch((error) => {
-  //     console.error("Error adding document: ", error);
-  // });
+ 
 let docName:any=this.signupForm.value['email'];
 
 this.dbService.addDataCustomDoc(this.collection_name,docName,signupData);
 
 this.signupForm.reset();
 alert('Success');
-  // this.firebase.collection("signupDetails").doc(docName).set(signupData)
-  // .then((docRef) => {
-  //     console.log("Document written with ID: ", docRef);
-  // })
-  // .catch((error) => {
-  //     console.error("Error adding document: ", error);
-  // });
-
-    // this.writeData(this.signupForm.value['f_name'],this.signupForm.value['email']);
-    // console.log(this.signupForm.value['email']);
-    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.signupForm.value));
+ 
 }
 }
 function push(arg0: Promise<void>) {

@@ -1,6 +1,6 @@
 import { EventEmitter, Injectable, Output } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
-import { Observable, Subject } from "rxjs";
+import { BehaviorSubject, Observable, Subject } from "rxjs";
 import { OrderDetail } from "./model/orderDetail.model";
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -9,6 +9,9 @@ export class AuthGuard implements CanActivate {
 
     userDetails=new Subject<string>();
 
+    mail_exists: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+   public mail_exists_Obs: Observable<boolean> = this.mail_exists.asObservable();
+
     constructor(private router: Router) { }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> |
@@ -16,5 +19,9 @@ export class AuthGuard implements CanActivate {
         
         return true;
     }
+
+    check_mail(status:boolean){
+        this.mail_exists.next(status);
+      }
 
 }

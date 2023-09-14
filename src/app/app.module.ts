@@ -34,6 +34,7 @@ import { TouchedErrorStateMatcher } from './touched-error-state.matcher';
 import { ListComponent } from './menu/list/list.component';
 import { DetailsComponent } from './menu/details/details.component';
 import { OrderComponent } from './order/order.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { OrderComponent } from './order/order.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule,
     
     // provideFirebaseApp(() => initializeApp(environment.firebase)),
     // provideAnalytics(() => getAnalytics()),

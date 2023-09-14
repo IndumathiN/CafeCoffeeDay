@@ -22,3 +22,9 @@
     text-align: center;
     flex: 1 1 auto;
   }
+  .mail_ok{
+    color: green;
+  }
+  .mail_notok{
+    color: red;
+  }
