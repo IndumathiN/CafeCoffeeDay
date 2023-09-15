@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthGuard } from '../auth-guard.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,9 @@ import { AuthGuard } from '../auth-guard.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private formBuilder: FormBuilder,private route:ActivatedRoute,private router: Router,private authService:AuthGuard) { }
+  constructor(private formBuilder: FormBuilder,private firebase:AngularFirestore,
+              private route:ActivatedRoute,private router: Router,
+              private authService:AuthGuard) { }
   
   hide = true;
   submitted=false;
@@ -32,6 +35,30 @@ get f() { return this.signupForm.controls; }
         return;
     }
    //  this.authService.userDetails.next();
-    this.router.navigate(['/signup']);
+   let email:any=this.signupForm.value['email'];
+   let f_password:any=this.signupForm.value['password'];
+   this.firebase.collection("signupDetails").doc(email).ref.get().then( (doc) => {
+    if (doc.exists) {
+      const password=doc.get('password');
+      if(password==f_password){
+        this.router.navigate(['/signup']);
+      }
+      else{
+        alert("Incorrect Password");
+      }
+     
+      
+      
+     
+    } else {
+      alert("No such user!!!");
+     
+  
+    
+    }
+  }).catch(function (error) {
+    console.log("There was an error getting your document:", error);
+  });
+    
 }
 }

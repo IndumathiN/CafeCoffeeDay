@@ -25,13 +25,13 @@ export class DetailsComponent implements OnInit,OnDestroy {
   submitted=false;
   id:any='';
   collection='coffee';
- 
+  order_data:OrderDetail[]=[];
 
   constructor(private formBuilder: FormBuilder, private firebase: AngularFirestore,
     private dbService: DbServiceTsService,private route: ActivatedRoute,private authService:AuthGuard) {  }
 
   @Input('formGroup') detailForm = this.formBuilder.group({
-    flavor: ['', [Validators.required]],
+    flavor: ['Caramel Swirl', [Validators.required]],
     sweetner: ['None', [Validators.required]],
     dairy: ['No Milk', [Validators.required]],
     size: ['', [Validators.required]],
@@ -43,14 +43,16 @@ export class DetailsComponent implements OnInit,OnDestroy {
     this.dairy = this.dbService.loadDropDownData('dairy');
     
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log(this.id);
+  //  console.log(this.id);
    
     this.data=this.dbService.getDetailsByDocId(this.collection,this.id)
    .subscribe(res=>{ 
      this.data=res;
    
     });
-    
+    this.authService.order_data_Obs.subscribe(data =>{ this.order_data = data;
+    console.log(data);
+    });
  
   }
 
@@ -80,9 +82,10 @@ export class DetailsComponent implements OnInit,OnDestroy {
         };
       let orderArr=[];
       orderArr.push(orderData);
-     // console.log(orderArr);
-      this.authService.orderCart.emit(orderArr.length as unknown as Event);
-      this.authService.orderCartArr.emit(orderArr);
+   
+    
+      this.authService.push_orderData(orderData);
+   
     }
 
     
