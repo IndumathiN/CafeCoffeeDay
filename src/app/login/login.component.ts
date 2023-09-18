@@ -1,18 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthGuard } from '../auth-guard.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { DbServiceTsService } from '../service/db-service.ts.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private firebase:AngularFirestore,
               private route:ActivatedRoute,private router: Router,
-              private authService:AuthGuard) { }
+              private authService:AuthGuard,
+              private dbService:DbServiceTsService) { }
+  ngOnInit(): void {
+    this.authService.loggedIn.subscribe((status)=>
+  
+    {
+      //this.logStatus=status;
+      console.log('status:'+status+' bagde ');
+    }
+    
+    );
+  }
   
   hide = true;
   submitted=false;
@@ -41,6 +53,19 @@ get f() { return this.signupForm.controls; }
     if (doc.exists) {
       const password=doc.get('password');
       if(password==f_password){
+        let dat=this.authService.date_TO_String(new Date());
+        this.authService.check_loggedIn(true);
+        this.authService.logged_details.next({fname:doc.get('fname'),lname:doc.get('lname'),date:dat ,email:doc.get('email')});
+
+        //Add loggedIn details to subcollection
+        let dataArray={logIn:dat};
+        this.dbService.add_SubCollection('signupDetails',doc.id,'loggedDetails',dataArray,'logging');
+
+      //  this.dbService.add_SubCollection('logDetails',doc.id,'loggedDetails',dataArray,'logging');
+       
+        //need to keep track of logDetails **need to do**
+
+    //end
         this.router.navigate(['/signup']);
       }
       else{

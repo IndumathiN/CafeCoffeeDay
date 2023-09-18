@@ -39,6 +39,10 @@ export class SignupComponent implements OnInit{
 console.log(this.route.snapshot.data['id']);
 
 this.authService.mail_exists_Obs.subscribe(data => this.check = data);
+
+this.authService.logged_details.subscribe(data=> console.log(data));
+
+
 }
 
 writeData(user: string | null | undefined,email: string | null | undefined){

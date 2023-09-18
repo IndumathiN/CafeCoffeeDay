@@ -35,10 +35,14 @@
       <mat-icon routerLinkActive="active">person_add</mat-icon>
       Register
   </a>
-  <a mat-button routerLink="login" routerLinkActive="active">
+  <a mat-button routerLink="login" routerLinkActive="active" *ngIf="!logStatus">
       <mat-icon>account_circle</mat-icon>
       Login
   </a>
+  <a mat-button  (click)="setLogStatus()" *ngIf="logStatus">
+    <mat-icon>power_settings_new</mat-icon>
+    Logout
+</a>
 </div>
  
   </mat-toolbar>

@@ -20,6 +20,8 @@ export class AuthGuard implements CanActivate {
     //cart details array(details comp)
     order_data: BehaviorSubject<OrderDetail[]> = new BehaviorSubject<OrderDetail[]>([]);
     order_data_Obs: Observable<OrderDetail[]> = this.order_data.asObservable();
+    //get subCollectionId for updating logout
+    log_subColl_id=new Subject<string>();
 
     constructor(private router: Router) { }
 
@@ -43,6 +45,21 @@ export class AuthGuard implements CanActivate {
       currentData.push(data);
         this.order_data.next(currentData);
         this.no_order.next(currentData.length);
+      }
+
+      date_TO_String(date_Object: Date): string {
+        // get the year, month, date, hours, and minutes seprately and append to the string.
+        let date_String: string =
+          date_Object.getFullYear() +
+          "/" +
+          (date_Object.getMonth() + 1) +
+          "/" +
+          +date_Object.getDate() +
+          " " +
+          +date_Object.getHours() +
+          ":" +
+          +date_Object.getMinutes();
+        return date_String;
       }
       
 
