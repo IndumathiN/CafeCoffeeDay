@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth-guard.service';
 import {HomeComponent} from "./home/home.component";
 import { LoginComponent } from './login/login.component';
+import { CustomizeComponent } from './menu/customize/customize.component';
 import { DetailsComponent } from './menu/details/details.component';
 import { ItemComponent } from './menu/item/item.component';
 import { ListComponent } from './menu/list/list.component';
@@ -46,6 +47,10 @@ const routes: Routes = [
     {
         path: "menudetail/:id",
         component: DetailsComponent
+    },
+    {
+        path: "customize",
+        component: CustomizeComponent
     },
     {
         path: "**",

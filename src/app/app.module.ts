@@ -35,6 +35,9 @@ import { ListComponent } from './menu/list/list.component';
 import { DetailsComponent } from './menu/details/details.component';
 import { OrderComponent } from './order/order.component';
 import { CommonModule } from '@angular/common';
+import { CustomizeComponent } from './menu/customize/customize.component';
+import { AddDialogComponent } from './dialog/add-dialog/add-dialog.component';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +52,9 @@ import { CommonModule } from '@angular/common';
     PriceComponent,
     ListComponent,
     DetailsComponent,
-    OrderComponent
+    OrderComponent,
+    CustomizeComponent,
+    AddDialogComponent
   ],
   imports: [
     BrowserModule,

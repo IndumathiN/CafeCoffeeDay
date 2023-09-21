@@ -1,0 +1,31 @@
+.container{
+    max-width: 500px;
+  background: #fff;
+  width: 800px;
+  padding: 25px 40px 10px 40px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+
+  border: 5px ;
+  margin: auto;
+
+  
+ 
+}
+.input_width{
+    width: 100%;
+}
+.container .form{
+    padding: 30px 0 0 0;
+    
+  }
+  .slide{
+    
+        margin: 30px;
+     
+  }
+  .submit_width{
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
