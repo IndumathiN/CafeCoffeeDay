@@ -21,6 +21,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 
 
@@ -45,6 +47,8 @@ const MaterialComponent=[MatButtonModule,
   MatCardModule,
   MatSlideToggleModule,
   MatTabsModule,
+  MatPaginatorModule,
+  MatSortModule,
   MatButtonToggleModule];
 @NgModule({
   

@@ -2,12 +2,12 @@
 <form [formGroup]="form" class="form">
 <div mat-dialog-content>
     <mat-form-field class="input_width">
-        <input matInput formControlName="name" placeholder="Name">
+        <input matInput formControlName="name" placeholder="Name" #name>
       </mat-form-field>
-      <mat-slide-toggle class="slide" formControlName="active">Active</mat-slide-toggle>
+      <mat-slide-toggle class="slide" formControlName="active" #active>Active</mat-slide-toggle>
 </div>
 </form>
 <div mat-dialog-actions class="submit_width">
   <button mat-raised-button (click)="onNoClick()" color="accent">Cancel</button>
-  <button mat-raised-button mat-dialog-close (click)="addDetails()" [disabled]="!form.valid"  color="primary">{{action}}</button>
+  <button mat-raised-button mat-dialog-close (click)="addDetails(action)" [disabled]="!form.valid"  color="primary">{{action}}</button>
 </div>

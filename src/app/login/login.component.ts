@@ -60,7 +60,7 @@ get f() { return this.signupForm.controls; }
         //Add loggedIn details to subcollection
         let dataArray={logIn:dat};
         this.dbService.add_SubCollection('signupDetails',doc.id,'loggedDetails',dataArray,'logging');
-
+        
       //  this.dbService.add_SubCollection('logDetails',doc.id,'loggedDetails',dataArray,'logging');
        
         //need to keep track of logDetails **need to do**

@@ -29,3 +29,11 @@
     align-items: center;
     justify-content: center;
   }
+  .parent{
+    position: relative;
+  }
+  .child{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+  }
