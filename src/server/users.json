@@ -1,0 +1,20 @@
+{
+    "users": [
+        {
+            "name": "test",
+            "email": "t@g.co",
+            "password": "123456",
+            "createdAt": "2023-10-10T15:15:58.424Z",
+            "uniqueIdString": "9d6aed82ec5fc0021e8975d9ab48e7c6",
+            "id": 1
+        },
+        {
+            "name": "test",
+            "email": "t@gmail.com",
+            "password": "123456",
+            "createdAt": "2023-10-20T22:53:04.847Z",
+            "uniqueIdString": "77950a0cead6fab803fc83c5686294a6",
+            "id": 2
+        }
+    ]
+}
