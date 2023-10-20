@@ -8,6 +8,7 @@ import { DetailsComponent } from './menu/details/details.component';
 import { ItemComponent } from './menu/item/item.component';
 import { ListComponent } from './menu/list/list.component';
 import { MenuComponent } from './menu/menu.component';
+import { OrderComponent } from './order/order.component';
 import { SignupDetailsComponent } from './signup/signup-details/signup-details.component';
 import { SignupComponent } from './signup/signup.component';
 
@@ -51,6 +52,10 @@ const routes: Routes = [
     {
         path: "customize",
         component: CustomizeComponent
+    },
+    {
+        path: "cart",
+        component: OrderComponent
     },
     {
         path: "**",

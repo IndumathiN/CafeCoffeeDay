@@ -1,1 +1,31 @@
-<p>order works!</p>
+<div class="container mat-elevation-z7" *ngFor="let order of cart;; let i = index">
+    <mat-card >
+        <div class="title">
+        <span class="outlook">
+        <img
+          mat-card-image
+          [src]="order.image"
+          alt="Photo of a Shiba Inu"
+        />
+    </span>
+   
+    <span class="header">{{order.name}}</span>
+    <span class="price">{{order.price}}</span>
+  
+</div>
+        <mat-card-content class="customs">
+         <p> {{order.size}}</p>
+         <p>{{order.sweetner}}</p>
+         <p>{{order.flavors}}</p>
+         <p> {{order.dairy}}</p>
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button mat-icon-button matTooltip="Click to Edit" class="iconbutton" color="primary">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+          </button>
+        <button mat-icon-button matTooltip="Click to Delete" class="iconbutton" color="warn" (click)="openDialog(i)">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>

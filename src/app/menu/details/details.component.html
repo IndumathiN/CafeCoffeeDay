@@ -14,7 +14,7 @@
     <section>
       <div class="">
         <mat-label>Size Options</mat-label>
-        <mat-divider></mat-divider>
+        
         <mat-form-field class="input_width">
           <mat-select formControlName="size">
             <mat-option value="small">Small</mat-option>
@@ -23,6 +23,15 @@
           </mat-select>
         </mat-form-field>
 
+        <mat-label>Quantity</mat-label>
+        
+        <mat-form-field class="input_width">
+          <button matSuffix mat-raised-button (click)="decrementQuantity()">-</button>
+          <input matInput  [(ngModel)]="quantity" formControlName="quantity">
+          <button matPrefix mat-raised-button (click)="incrementQuantity()">+</button>
+       
+        </mat-form-field>
+        
 
       </div>
     </section>

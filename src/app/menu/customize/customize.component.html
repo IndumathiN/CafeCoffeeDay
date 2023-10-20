@@ -15,7 +15,7 @@
           </mat-form-field>
 
           
-          <div >
+          <div *ngIf="optionSelected">
           <mat-toolbar class="parent" color="accent" >
             <span class="head">{{custom_data}}</span>
             <button mat-mini-fab class="iconbutton child" color="primary" [disabled]="isButtonDisabled(matSelect)" (click)="addDialog('new','Add')">

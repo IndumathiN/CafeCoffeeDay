@@ -3,7 +3,10 @@ export interface OrderDetail {
     name: any; 
     size:any; 
     sweetner:any;
+    quantity:any;
     flavors:any;
-    dairy:any
+    dairy:any;
+    image:any;
+    price:any;
     
   }

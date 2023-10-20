@@ -40,11 +40,16 @@ export class AuthGuard implements CanActivate {
       }
 
       push_orderData(data:OrderDetail){
-    
+        
       const currentData = this.order_data.value.slice(); //takes copy of old array
       currentData.push(data);
+        
         this.order_data.next(currentData);
         this.no_order.next(currentData.length);
+      }
+      rearrange_orderData(data:OrderDetail[]){
+        this.order_data.next(data);
+        this.no_order.next(data.length);
       }
 
       date_TO_String(date_Object: Date): string {

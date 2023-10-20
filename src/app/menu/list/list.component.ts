@@ -23,6 +23,7 @@ export class ListComponent implements AfterViewInit {
   docName!: string;
 
   ngAfterViewInit() {
+ //   console.log("ngafterview");
     let tabName=this.tabGroup._tabs.first.textLabel;
     let doc_name=tabName.toLowerCase();
     this.loadData(doc_name);
@@ -44,12 +45,12 @@ export class ListComponent implements AfterViewInit {
     });
   }
   tabChanged(tabChangeEvent: MatTabChangeEvent): void {
-   
+   // console.log("tab change");
     let tabname=tabChangeEvent.tab.textLabel;
     let doc_name=tabname.toLowerCase();
     this.docName=doc_name;
     this.loadData(doc_name);
-
+   
 
   }
 

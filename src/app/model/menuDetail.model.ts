@@ -8,5 +8,6 @@ export interface MenuDetail {
     flavor: string;
     image: string;
     sweetner: string;
+    pricelist:any;
     
   }
