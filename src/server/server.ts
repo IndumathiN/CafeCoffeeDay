@@ -14,6 +14,7 @@ import { Response } from 'express';
 app.post('/api/login', (req: { body: LoginData; }, res: Response<User | any>) => {
 
     const loginData = req.body as LoginData;
+    console.log(loginData);
     const user = authService.login(loginData.email, loginData.password);
     // return user or 401 depending on whether user exists
     if (user !== undefined) {
