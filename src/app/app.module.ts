@@ -37,6 +37,7 @@ import { OrderComponent } from './order/order.component';
 import { CommonModule } from '@angular/common';
 import { CustomizeComponent } from './menu/customize/customize.component';
 import { AddDialogComponent } from './dialog/add-dialog/add-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { AddDialogComponent } from './dialog/add-dialog/add-dialog.component';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    HttpClientModule,
     
     // provideFirebaseApp(() => initializeApp(environment.firebase)),
     // provideAnalytics(() => getAnalytics()),
