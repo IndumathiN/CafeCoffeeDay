@@ -1,4 +1,4 @@
-import { LoginData, authService, User } from './auth';
+import { LoginData, authService, User, RegisterData } from './auth';
 
 const e = require('express');
 const app = e();
@@ -15,6 +15,7 @@ app.post('/api/login', (req: { body: LoginData; }, res: Response<User | any>) =>
 
     const loginData = req.body as LoginData;
     console.log(loginData);
+  
     const user = authService.login(loginData.email, loginData.password);
     // return user or 401 depending on whether user exists
     if (user !== undefined) {
@@ -24,8 +25,8 @@ app.post('/api/login', (req: { body: LoginData; }, res: Response<User | any>) =>
     }
 });
 
-app.post('/api/register', (req: { body: User; }, res: Response<User|any>) => {
-    const user = req.body as User;
+app.post('/api/register', (req: { body: RegisterData; }, res: Response<User|any>) => {
+    const user = req.body as RegisterData;
     const userCreated = authService.register(user);
     if(userCreated !== undefined) {
         res.status(201).json(userCreated);

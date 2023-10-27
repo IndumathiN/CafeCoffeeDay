@@ -1,0 +1,44 @@
+{
+    "signup": [
+        {
+            "id": 1,
+            "fname": "Indu",
+            "lname": "mathi",
+            "email": "indu@mail.com",
+            "password": "In12345678",
+            "mobile": "9846546445",
+            "uniqueIdString": "9c3b4d10daa69a4b3a265622c6e810c0",
+            "createdAt": "2023-10-26T21:59:54.616Z"
+        },
+        {
+            "fname": "Nirmal",
+            "lname": "M S",
+            "email": "nirm@mail.com",
+            "password": "Msnir1234",
+            "mobile": 987654345678,
+            "createdAt": "2023-10-26T22:02:46.412Z",
+            "uniqueIdString": "020e65fe49185ec677bfa3e5cdb6fd0c",
+            "id": 2
+        },
+        {
+            "id": 3,
+            "fname": "Indu",
+            "lname": "mathi",
+            "email": "indu.amthi@mail.com",
+            "password": "In12345678",
+            "mobile": "9846546445",
+            "uniqueIdString": "dd9b14adf01e5b61fce7215da1c689ae",
+            "createdAt": "2023-10-27T00:02:44.395Z"
+        },
+        {
+            "fname": "Dharshini",
+            "lname": "s",
+            "email": "dharshu@mail.com",
+            "password": "Dharshu@123",
+            "mobile": 96785674563,
+            "createdAt": "2023-10-27T00:04:01.376Z",
+            "uniqueIdString": "cf93656dfae901de87b4b83e6ef2272f",
+            "id": 4
+        }
+    ]
+}

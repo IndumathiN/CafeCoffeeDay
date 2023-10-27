@@ -8,6 +8,8 @@ import { getFirestore, QueryDocumentSnapshot, SnapshotOptions, WithFieldValue } 
 import { ActivatedRoute } from '@angular/router';
 import { DbServiceTsService } from '../service/db-service.ts.service';
 import { AuthGuard } from '../auth-guard.service';
+import { LoginService } from '../service/login.service';
+import { RegisterData } from '../model/auth';
 
 @Component({
   selector: 'app-signup',
@@ -20,6 +22,7 @@ export class SignupComponent implements OnInit{
   constructor(private formBuilder: FormBuilder,private firebase:AngularFirestore,
     private route: ActivatedRoute,
     private dbService:DbServiceTsService,
+    private loginService: LoginService,
     public authService:AuthGuard) { 
     
 
@@ -147,7 +150,7 @@ emailCheck(email:any){
     }
 
 
-    let signupData={
+    let signupData:RegisterData={
       fname:this.signupForm.value['f_name'],
       lname:this.signupForm.value['l_name'],
       email:this.signupForm.value['email'],
@@ -158,7 +161,16 @@ emailCheck(email:any){
  
 let docName:any=this.signupForm.value['email'];
 
-this.dbService.addDataCustomDoc(this.collection_name,docName,signupData);
+this.loginService.register(signupData).subscribe({next : (res) => {
+  console.log(res)
+ // this.router.navigate(['/signup']);
+ }, 
+ error: (err) => {
+  console.log(err)
+  alert("Incorrect Password");
+ }})
+
+//this.dbService.addDataCustomDoc(this.collection_name,docName,signupData);
 
 this.signupForm.reset();
 alert('Success');
